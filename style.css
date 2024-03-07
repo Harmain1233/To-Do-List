@@ -1,0 +1,46 @@
+
+
+
+.container {
+    margin-top: 40px;
+    width: 500px;
+    padding: 25px 40px 25px 25px; 
+    border: 2px solid #000000;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    height: 600px;
+    overflow-y: auto;
+    overscroll-behavior-y: contain; 
+
+}
+
+ul{
+    padding: 0;
+}
+  
+
+
+
+li{
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffc4c4;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+
+.deleteTask{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
