@@ -1,44 +1,149 @@
-
-
-
-.container {
-    margin-top: 40px;
-    width: 500px;
-    padding: 25px 40px 25px 25px; 
-    border: 2px solid #000000;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    height: 600px;
-    overflow-y: auto;
-    overscroll-behavior-y: contain; 
-
-}
-
-ul{
+* {
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-  
 
+body {
+    background-image: url(school.jpeg);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+}
+
+.todo-header {
+    margin-top: 30px;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.todo-header i {
+    margin-right: -20px; 
+}
+
+
+.fa-list {
+    margin-left: 1.0rem; 
+}
+
+.container{
+    margin-top: 50px;
+    background-color: white;
+    width: 900px;
+    height: 600px;
+    padding: 0.3rem;
+    padding-left: 1rem; /* used values from the form input/buttons to style the container */
+    border-radius: 1rem;
+    margin-bottom: 3rem;  
+    
+}
+
+.todo-header, 
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form input,
+form button,
+select {
+    padding: 0.2rem;
+    padding-left: 1rem;
+    font-size: 1.3rem;
+    border-color: rgb(0, 0, 0);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    margin-left: 0.5rem;
+}
+
+form button {
+    color: rgb(152, 207, 252);
+    background: white;
+    transition: all 0.3 ease;
+    margin-left: 0.5rem;
+    border: none;
+}
+
+
+.fa-plus-circle {
+    color: rgb(72, 9, 9);
+    margin-top: 0.3rem;
+    margin-left: -8px;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 2rem;
+}
+
+
+.todo-list {
+    color: black;
+    min-width: 30%;
+    list-style: none;
+}
+
+.todo {
+    margin: 0.5rem;
+    padding-left: 0.5rem;
+    color: black;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 2rem;
+}
+
+.todo-item {
+    padding: 0rem 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 3rem;  
+    margin-left: 0.5rem; 
+}
 
 
 li{
     margin: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    background-color: #ffc4c4;
+    display: grid;
+    grid-template-columns: 60% 5% 28% 5%; /* Adjusted to accommodate the due date */
+    gap: 5px;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 8px;
     border-radius: 5px;
-}
+    width: 700px;
+    }
 
-
-.deleteTask{
-    background-color: rgb(0, 0, 0);
-    color: white;
+    
+.deleteTask {
+    background: rgb(70, 2, 2);
     border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+    color: white; 
+    padding: 8px 16px; 
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 0.5rem;
+    margin-top: 0.3rem;
+    margin-left: -30px;
+
 }
+
+.deleteTask:hover {
+    background: rgb(238, 70, 55); 
+    color: white; /* White text color on hover */
+}
+
+          
+
+
 
 
 
