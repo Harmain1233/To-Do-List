@@ -1,85 +1,95 @@
-const addButton = document.getElementById('addTask');
-const taskInput = document.getElementById('taskInput');
-const taskList = document.getElementById('taskList');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('form');
+    const taskInput = document.getElementById('taskInput');
+    const priority = document.getElementById('priority');
+    const taskList = document.getElementById('taskList');
+   // const dateInput = document.getElementById('dateInput');
 
-loadTasks(); // loads the previously saved tasks
-
-function addTask() {
-
-    const task = taskInput.value.trim(); /* allows spaces in values */
-     
-
-    if (task) {
-        createTaskElement(task);
-
-        taskInput.value = ' ';
-
-        saveTasks();
-
-    } else {
-        alert('Please enter a task!');
-    }
-
-}
-
-addButton.addEventListener('click', addTask);
-
-function createTaskElement(task){
-
-    const listItem = document.createElement('li');
-
-    listItem.textContent = task;
-
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'deleteTask';
-    deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-   
-    /*re - used delete button code for this */
-    const checkBox = document.createElement('input'); // Create an input element
-checkBox.setAttribute('type', 'checkbox'); // Set its type to 'checkbox'
-checkBox.className = 'checkBox'; // Set its class name
- 
-    const dateInput = document.createElement('input');
-    dateInput.setAttribute('type', 'date');
-    dateInput.setAttribute('id', 'dateInput');
-    dateInput.setAttribute('name', 'dateInput');
-
-   listItem.appendChild(dateInput); 
-
-
-
-    listItem.appendChild(checkBox); 
-    listItem.appendChild(deleteButton);
-
-    taskList.appendChild(listItem);
-
-    deleteButton.addEventListener('click', function() {
-      taskList.removeChild(listItem);
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const task = taskInput.value.trim();
+        if (task !== '') {
+            createTaskElement(task);
+            taskInput.value = '';
+        }
     });
 
-}
+    function createTaskElement(task) {
+        const listItem = document.createElement('li');
+        listItem.textContent = task;
 
-/* allows tasks to be saved to local storage */
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'deleteTask';
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
 
-function saveTasks(){
+        const addSubTask = document.createElement('button');
+       addSubTask.className = 'SubButton';
+       addSubTask.innerHTML = '<i class="fas fa-list-alt"></i>'; // Added the closing double quote and closing tag
+
+
+        const checkBox = document.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+        checkBox.className = 'checkBox';
+
+        const priorityIcon = document.createElement('i');
+        priorityIcon.classList.add('fa-solid', 'fa-circle-exclamation');
+        
+
+        const priorityColor = priority.value; // Get the selected priority value
+
+        const dateInput = document.getElementById('dateInput');
+        const dateValue = dateInput.value; // Get the value of the date input
     
+        const dateTextNode = document.createTextNode(dateValue); // Create text node with date value
 
-    let tasks = [];
-    taskList.querySelectorAll('li').forEach(function(item) {
-        tasks.push(item.textContent.replace('Delete', '').trim());
-    });
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+        // Create text node for the label "Due Date: "
+    const dueDateLabel = document.createTextNode('Due Date: ');
+          
 
 
-/* this function will load tasks that were previously saved 
-1. convert tasks into json format 
-2. create task element for each value in tasks array and allow it to be loaded */ 
-function loadTasks() {
-   
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-    tasks.forEach(createTaskElement);
+        // Update the style of the list item based on the selected priority
+        switch (priorityColor) {
+            case 'highpriority':
+                listItem.style.backgroundColor = '#800000';
+                break;
+            case 'mediumpriority':
+                listItem.style.backgroundColor = '#D64545                ';
+                break;
+            case 'lowpriority':
+                listItem.style.backgroundColor = '#FF6347';
+                break;
+            default:
+                listItem.style.backgroundColor = '';
+        }
 
-}
+       
+        
+       
+        listItem.appendChild(checkBox);
+        taskList.appendChild(listItem);
+        listItem.appendChild(dueDateLabel);
+        listItem.appendChild(dateTextNode);
+        listItem.appendChild(deleteButton);
+
+
+
+        deleteButton.addEventListener('click', function () {
+            taskList.removeChild(listItem);
+        });
+
+        checkBox.addEventListener('change', function () {
+            if (checkBox.checked) {
+                listItem.style.opacity = '0.5'; // Make the item transparent if checkbox is checked'
+               
+                alert('Congratulations! You completed a task!');
+
+
+            } else {
+                listItem.style.opacity = '1'; // Restore opacity if checkbox is unchecked
+            }
+        });
+
+    
+    }
+});
